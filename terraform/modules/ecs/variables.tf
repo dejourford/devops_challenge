@@ -1,0 +1,12 @@
+variable "project" {type = string}
+variable "environment" {type = string}
+variable "task_execution_role_arn" {type = string}
+variable "frontend_ecr_url" {type = string}
+variable "backend_url" {type = string}
+variable "backend_ecr_url" {type = string}
+variable "frontend_url" {type = string}
+variable "private_subnet_a_id" {type = string}
+variable "private_subnet_b_id" {type = string}
+variable "ecs_sg_id" {type = string}
+variable "target_group_arn" {type = string}
+
