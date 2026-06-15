@@ -10,14 +10,15 @@ function App() {
     const getId = async () => {
       try {
         const resp = await fetch(API_URL)
-        setSuccessMessage((await resp.json()).id)
+        const data = await resp.json()
+        setSuccessMessage(`${data.message} ${data.id}`)
       }
       catch(e) {
         setFailureMessage(e.message)
       }
     }
     getId()
-  })
+  }, [])
 
   return (
     <div className="App">
