@@ -65,6 +65,8 @@ module "ecs" {
   frontend_url = var.frontend_url
   backend_url = var.backend_url
   ecs_sg_id = module.sg.ecs_sg_id
+  alb_listener_arn = module.alb.alb_listener_arn
 }
+
 
 
