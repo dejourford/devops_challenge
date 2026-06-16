@@ -1,5 +1,5 @@
 variable "project" {type = string}
-variable "environment" {type = environment}
+variable "environment" {type = string}
 variable "vpc_cidr" {type = string}
 variable "public_a_cidr" {type = string}
 variable "public_b_cidr" {type = string}
