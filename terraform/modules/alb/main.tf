@@ -48,9 +48,10 @@ resource "aws_lb_target_group" "backend" {
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
   target_type = "ip"
+  deregistration_delay = 30
 
   health_check {
-    path                = "/"
+    path                = "/api"
     healthy_threshold   = 2
     unhealthy_threshold = 3
   }
@@ -68,7 +69,7 @@ resource "aws_lb_listener_rule" "backend" {
 
   condition {
     path_pattern {
-      values = ["/api/", "/api/*"]
+      values = ["/api", "/api/*"]
     }
   }
 }
