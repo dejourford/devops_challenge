@@ -1,9 +1,7 @@
 const express = require('express')
 const { v4: uuidv4 } = require('uuid');
-const { CORS_ORIGIN } = require('./config')
-console.log(require('./config'))
-console.log(CORS_ORIGIN)
 
+const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:3000'
 const ID = uuidv4()
 const PORT = 8080
 
@@ -16,7 +14,8 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', '*')
     next();
 })
-app.get(/.*/, (req, res) => {
+
+app.get('/api/*', (req, res) => {
     console.log(`${new Date().toISOString()} GET`)
     res.json({ message: "SUCCESS", id: ID })
 })
