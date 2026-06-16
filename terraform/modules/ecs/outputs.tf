@@ -14,6 +14,3 @@ output "backend_service_name" {
   value = aws_ecs_service.backend.name
 }
 
-output "alb_listener_arn" {
-  value = aws_lb_listener.http.arn
-}
