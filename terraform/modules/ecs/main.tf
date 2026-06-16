@@ -119,6 +119,12 @@ resource "aws_ecs_service" "backend" {
     assign_public_ip = false
   }
 
+  load_balancer {
+    target_group_arn = var.backend_target_group_arn
+    container_name   = "backend"
+    container_port   = 8080
+  }
+
   tags = {
     Name = "${var.project}-${var.environment}-backend-svc"
   }

@@ -8,4 +8,5 @@ variable "environment" {type = string}
 variable "myIpAddress" {type = string}
 variable "frontend_url" {type = string}
 variable "backend_url" {type = string}
-variable "alb_listener_arn" { type = string }
+
+

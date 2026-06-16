@@ -21,12 +21,8 @@ resource "aws_lb_listener" "http" {
   protocol          = "HTTP"
 
   default_action {
-    type = "redirect"
-    redirect {
-      port        = "443"
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
-    }
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.frontend.arn
   }
 }
 
@@ -42,5 +38,37 @@ resource "aws_lb_target_group" "frontend" {
     path                = "/"
     healthy_threshold   = 2
     unhealthy_threshold = 3
+  }
+}
+
+# BACKEND TARGET GROUP
+resource "aws_lb_target_group" "backend" {
+  name        = "${var.project}-${var.environment}-backend-tg"
+  port        = 8080
+  protocol    = "HTTP"
+  vpc_id      = var.vpc_id
+  target_type = "ip"
+
+  health_check {
+    path                = "/"
+    healthy_threshold   = 2
+    unhealthy_threshold = 3
+  }
+}
+
+# LISTENER RULE FOR BACKEND
+resource "aws_lb_listener_rule" "backend" {
+  listener_arn = aws_lb_listener.http.arn
+  priority     = 100
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.backend.arn
+  }
+
+  condition {
+    path_pattern {
+      values = ["/api/*"]
+    }
   }
 }

@@ -9,4 +9,4 @@ variable "private_subnet_a_id" {type = string}
 variable "private_subnet_b_id" {type = string}
 variable "ecs_sg_id" {type = string}
 variable "target_group_arn" {type = string}
-variable "alb_listener_arn" { type = string }
+variable "backend_target_group_arn" {type = string}
